@@ -1,0 +1,32 @@
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-name">ISI</div>
+    <div class="brand-sub">Gestion Académique</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+      <span class="nav-icon">📊</span> Dashboard
+    </a>
+    <a class="nav-item" routerLink="/secteurs" routerLinkActive="active">
+      <span class="nav-icon">📂</span> Secteurs
+    </a>
+    <a class="nav-item" routerLink="/classes" routerLinkActive="active">
+      <span class="nav-icon">📚</span> Classes
+    </a>
+    <div style="height:1px; background:var(--border); margin:8px 20px;"></div>
+    <a class="nav-item" (click)="logout()" style="cursor:pointer; color:var(--accent)">
+      <span class="nav-icon">🚪</span> Déconnexion
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">
+      Connecté : <strong style="color:var(--text)">{{ user?.username }}</strong>
+    </div>
+    <div class="api-status">
+      <div class="status-dot" [class.offline]="!apiOnline"></div>
+      <span>{{ apiOnline ? 'API connectée' : 'API déconnectée' }}</span>
+    </div>
+  </div>
+</div>

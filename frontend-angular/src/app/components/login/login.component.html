@@ -1,0 +1,33 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">ISI</div>
+      <div class="login-subtitle">Gestion Académique — Connexion</div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+    <form (ngSubmit)="login()">
+      <div class="form-group">
+        <label>Nom d'utilisateur</label>
+        <input type="text" [(ngModel)]="username" name="username"
+               placeholder="admin" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" [(ngModel)]="password" name="password"
+               placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:10px;"
+              [disabled]="loading">
+        {{ loading ? 'Connexion...' : 'Se connecter' }}
+      </button>
+    </form>
+
+    <div style="margin-top:20px; padding:12px; background:var(--card); border-radius:4px; font-size:12px; color:var(--text-muted);">
+      <strong style="color:var(--text)">Comptes de test :</strong><br>
+      Admin : <code>admin</code> / <code>admin123</code><br>
+      User : <code>user</code> / <code>user123</code>
+    </div>
+  </div>
+</div>

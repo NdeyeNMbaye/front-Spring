@@ -1,0 +1,58 @@
+<div>
+  <div class="page-header">
+    <div>
+      <div class="page-title">Dashboard</div>
+      <div class="page-subtitle">Bienvenue, {{ user?.username }} — Vue d'ensemble du système</div>
+    </div>
+  </div>
+
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Chargement des statistiques...</span>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">{{ totalSecteurs }}</div>
+        <div class="stat-label">Secteurs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">{{ totalClasses }}</div>
+        <div class="stat-label">Classes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">v1</div>
+        <div class="stat-label">Version API</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--success)">✓</div>
+        <div class="stat-label">Système actif</div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:20px;">
+      <div style="font-family:'Space Mono',monospace; font-size:13px; margin-bottom:12px; color:var(--text-muted);">
+        INFORMATIONS SYSTÈME
+      </div>
+      <div style="display:grid; gap:10px; font-size:13px;">
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border);">
+          <span style="color:var(--text-muted)">Backend API</span>
+          <span style="color:var(--success)">http://192.168.56.11:8080</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border);">
+          <span style="color:var(--text-muted)">Base de données</span>
+          <span>PostgreSQL — schooldb</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border);">
+          <span style="color:var(--text-muted)">Serveur frontend</span>
+          <span>Nginx — server-front</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;">
+          <span style="color:var(--text-muted)">Rôle connecté</span>
+          <span style="color:var(--accent)">{{ user?.role }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

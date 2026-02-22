@@ -1,0 +1,78 @@
+<div>
+  <div class="page-header">
+    <div>
+      <div class="page-title">Classes</div>
+      <div class="page-subtitle">Gestion des classes académiques</div>
+    </div>
+    <button class="btn btn-primary" (click)="openAdd()">+ Ajouter</button>
+  </div>
+
+  <div class="alert alert-success" *ngIf="message && messageType === 'success'">{{ message }}</div>
+  <div class="alert alert-danger" *ngIf="message && messageType === 'danger'">{{ message }}</div>
+
+  <div class="card">
+    <div class="loading-spinner" *ngIf="loading">
+      <div class="spinner"></div>
+      <span>Chargement...</span>
+    </div>
+
+    <table *ngIf="!loading && classes.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Secteur</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of classes">
+          <td><span class="badge">#{{ c.id }}</span></td>
+          <td>{{ getName(c) }}</td>
+          <td style="color:var(--text-muted)">{{ getSecteurName(c) }}</td>
+          <td>
+            <div class="actions">
+              <button class="btn btn-success" (click)="openEdit(c)">Modifier</button>
+              <button class="btn btn-danger" (click)="delete(c)">Supprimer</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty-state" *ngIf="!loading && classes.length === 0">
+      <div class="empty-icon">📚</div>
+      <p>Aucune classe trouvée</p>
+      <button class="btn btn-primary" style="margin-top:12px;" (click)="openAdd()">Ajouter la première classe</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="showModal = false">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">{{ isEdit ? 'Modifier la classe' : 'Nouvelle classe' }}</div>
+      <button class="modal-close" (click)="showModal = false">✕</button>
+    </div>
+
+    <div class="form-group">
+      <label>Nom de la classe *</label>
+      <input type="text" [(ngModel)]="form.nom" placeholder="Ex: L1 Informatique" required>
+    </div>
+    <div class="form-group">
+      <label>Secteur</label>
+      <select [(ngModel)]="form.sectorId">
+        <option [value]="null">-- Sélectionner un secteur --</option>
+        <option *ngFor="let s of secteurs" [value]="s.id">{{ getSecteurNom(s) }}</option>
+      </select>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="showModal = false">Annuler</button>
+      <button class="btn btn-primary" (click)="save()" [disabled]="saving || !form.nom">
+        {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </div>
+  </div>
+</div>

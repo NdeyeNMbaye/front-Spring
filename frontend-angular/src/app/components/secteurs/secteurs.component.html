@@ -1,0 +1,75 @@
+<div>
+  <div class="page-header">
+    <div>
+      <div class="page-title">Secteurs</div>
+      <div class="page-subtitle">Gestion des secteurs académiques</div>
+    </div>
+    <button class="btn btn-primary" (click)="openAdd()">+ Ajouter</button>
+  </div>
+
+  <div class="alert alert-success" *ngIf="message && messageType === 'success'">{{ message }}</div>
+  <div class="alert alert-danger" *ngIf="message && messageType === 'danger'">{{ message }}</div>
+
+  <div class="card">
+    <div class="loading-spinner" *ngIf="loading">
+      <div class="spinner"></div>
+      <span>Chargement...</span>
+    </div>
+
+    <table *ngIf="!loading && secteurs.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of secteurs">
+          <td><span class="badge">#{{ s.id }}</span></td>
+          <td>{{ getName(s) }}</td>
+          <td style="color:var(--text-muted)">{{ s.description || '—' }}</td>
+          <td>
+            <div class="actions">
+              <button class="btn btn-success" (click)="openEdit(s)">Modifier</button>
+              <button class="btn btn-danger" (click)="delete(s)">Supprimer</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty-state" *ngIf="!loading && secteurs.length === 0">
+      <div class="empty-icon">📂</div>
+      <p>Aucun secteur trouvé</p>
+      <button class="btn btn-primary" style="margin-top:12px;" (click)="openAdd()">Ajouter le premier secteur</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="showModal = false">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">{{ isEdit ? 'Modifier le secteur' : 'Nouveau secteur' }}</div>
+      <button class="modal-close" (click)="showModal = false">✕</button>
+    </div>
+
+    <div class="form-group">
+      <label>Nom du secteur *</label>
+      <input type="text" [(ngModel)]="form.nom" placeholder="Ex: Informatique" required>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="form.description" rows="3" placeholder="Description du secteur..."></textarea>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="showModal = false">Annuler</button>
+      <button class="btn btn-primary" (click)="save()" [disabled]="saving || !form.nom">
+        {{ saving ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </div>
+  </div>
+</div>
