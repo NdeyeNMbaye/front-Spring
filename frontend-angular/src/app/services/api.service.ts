@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  // ─── SECTEURS ────────────────────────────────────────────
+  // ÔöÇÔöÇÔöÇ SECTEURS ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
   getSecteurs(): Observable<Secteur[]> {
     return this.http.get<Secteur[]>(`${this.baseUrl}/sectors/api/sectors`);
   }
@@ -27,7 +27,7 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/sectors/api/sectors/${id}`);
   }
 
-  // ─── CLASSES ─────────────────────────────────────────────
+  // ÔöÇÔöÇÔöÇ CLASSES ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
   getClasses(): Observable<Classe[]> {
     return this.http.get<Classe[]>(`${this.baseUrl}/classes/api/classes`);
   }
@@ -44,7 +44,7 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/classes/api/classes/${id}`);
   }
 
-  // ─── STATUS ──────────────────────────────────────────────
+  // ÔöÇÔöÇÔöÇ STATUS ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
   checkStatus(): Observable<any> {
     return this.http.get(`${this.baseUrl}/sectors/api/sectors`).pipe(
         catchError(() => of(null))

@@ -1,15 +1,14 @@
-export interface Secteur {
+﻿export interface Secteur {
   id?: number;
-  nom?: string;
   name?: string;
+  nom?: string;
   description?: string;
 }
 
 export interface Classe {
   id?: number;
-  nom?: string;
-  name?: string;
-  secteur?: Secteur;
-  sector?: Secteur;
-  sectorId?: number;
+  className: string;
+  description: string;
+  idSector: number;
+  sectorName?: string;
 }
